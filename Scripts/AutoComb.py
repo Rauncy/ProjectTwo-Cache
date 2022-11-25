@@ -7,7 +7,7 @@ import re
 dir_home = '/home/011/c/cr/crz180000/CS6304/Project2'
 dir_gem5 = f'{dir_home}/gem5'
 dir_spec = f'{dir_home}/Project1_SPEC'
-dir_output = f'{dir_home}/Results'
+dir_output = f'{dir_home}/ProjectTwo-Cache/Results'
 
 os.chdir(dir_gem5)
 
@@ -46,17 +46,23 @@ def paramsFromKeys(keys):
 def componentize(arr):
 	ret = []
 	for i in range(0, len(arr)):
-		t = [0,0,0,0,0,0,0]
+		t = [0 for _ in range(0,len(arr))]
 		t[i] = arr[i]
-		ret.append(t)
+		if t not in ret:
+			ret.append(t)
 	return ret
 
 #call(f'{dir_gem5}/build/X86/gem5.opt -d {dir_output}/TEMP {dir_gem5}/configs/example/se.py -I 500000000 -c {dir_spec}/401.bzip/src/benchmark -o {dir_spec}/401.bzip/data/input.program --cpu-type=timing --caches --l2cache {paramsFromKeys(keysFromInd([0,0,0,0,0,0,0]))}', shell=True)
 #call(f'{dir_spec}/401.bzip/run.sh')
-#Low, Medium, High as specified in discord
-param_grid = [[0, 0, 0, 0, 0, 0, 0], [4, 2, 4, 2, 1, 13, 5], [5, 3, 5, 3, 2, 14, 6]]
-param_grid = param_grid + [v for k in [componentize(i) for i in param_grid] for v in k]
-print(param_grid)
+# Low, Medium, High as specified
+# Low
+# Medium
+# High
+param_grid_t = [[0, 0, 0, 0, 0, 0, 0], [4, 2, 4, 2, 1, 13, 5], [5, 3, 5, 3, 2, 14, 6]]
+param_grid_t = param_grid_t + [v for k in [componentize(i) for i in param_grid_t] for v in k]
+param_grid = []
+[param_grid.append(v) for v in param_grid_t if v not in param_grid]
+print(f'Params to run: {param_grid}')
 for p in param_grid:
 	print(p)
 	k = keysFromInd(p)
@@ -67,8 +73,9 @@ for p in param_grid:
 		if bm == '429':
 			call(f'{dir_gem5}/build/X86/gem5.opt -d {dir_output}/TEMP {dir_gem5}/configs/example/se.py -I 500000000 -c {dir_spec}/429.mcf/src/benchmark -o {dir_spec}/429.mcf/data/inp.in --cpu-type=timing --caches --l2cache {paramsFromKeys(k)}', shell=True)
 		elif bm == '401':
-			call(f'{dir_gem5}/build/X86/gem5.opt -d {dir_output}/TEMP {dir_gem5}/configs/example/se.py -I 500000000 -c {dir_spec}/401.bzip/src/benchmark -o {dir_spec}/401.bzip/data/input.program --cpu-type=timing --caches --l2cache {paramsFromKeys(k)}', shell=True)
+			call(f'{dir_gem5}/build/X86/gem5.opt -d {dir_output}/TEMP {dir_gem5}/configs/example/se.py -I 500000000 -c {dir_spec}/401.bzip2/src/benchmark -o \"{dir_spec}/401.bzip2/data/input.program 10\" --cpu-type=timing --caches --l2cache {paramsFromKeys(k)}', shell=True)
 			#call(f'{dir_spec}/401.bzip/run.sh')
+			#time /home/010/c/cr/crz180000/CS6304/Project2/gem5/build/X86/gem5.opt -d ../ProjectTwo-Cache/Results/m5out /home/010/c/cr/crz180000/CS6304/Project2/gem5/configs/example/se.py -c ../Project1_SPEC/401.bzip2/src/benchmark -o "../Project1_SPEC/401.bzip2/data/input.program 10" -I 500000000 --cpu-type=timing --caches --l2cache --l1d_size=128kB --l1i_size=128kB --l2_size=1MB --l1d_assoc=2 --l1i_assoc=2 --l2_assoc=1 --cacheline_size=64
 		else:
 			print('Unknown benchmark')
 		# Call for hello world
