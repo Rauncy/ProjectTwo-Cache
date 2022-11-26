@@ -58,8 +58,8 @@ def componentize(arr):
 # Low
 # Medium
 # High
-param_grid_t = [[0, 0, 0, 0, 0, 0, 0], [4, 2, 4, 2, 1, 13, 5], [5, 3, 5, 3, 2, 14, 6]]
-param_grid_t = param_grid_t + [v for k in [componentize(i) for i in param_grid_t] for v in k]
+param_grid_t = [[0, 0, 0, 0, 0, 0, 0], [6, 2, 6, 2, 1, 12, 3], [7, 3, 7, 3, 2, 13, 4]]
+#param_grid_t = param_grid_t + [v for k in [componentize(i) for i in param_grid_t] for v in k]
 param_grid = []
 [param_grid.append(v) for v in param_grid_t if v not in param_grid]
 print(f'Params to run: {param_grid}')
