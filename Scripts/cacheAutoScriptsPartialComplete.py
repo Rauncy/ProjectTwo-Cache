@@ -13,7 +13,7 @@ currentOutputFileNumber = 0
 def benchmark429Run(instrCount, l1dSize, l1iSize, l2Size, l1dAssoc, l1iAssoc, l2Assoc, cacheline, dirName):
     print("----429 run----")
     global currentOutputFileNumber
-    myFileNumber = currentOutputFileNumber
+    myFileNumStr = str(currentOutputFileNumber)
     currentOutputFileNumber += 1
     currentTime = datetime.now()
     currentTimeString = currentTime.strftime('%T.%f')[:-3]
@@ -26,7 +26,7 @@ def benchmark429Run(instrCount, l1dSize, l1iSize, l2Size, l1dAssoc, l1iAssoc, l2
     os.chdir(dirChangeString)
 
     # Build string
-    benchmarkRunString = 'time ' + homeDir + '/gem5/build/X86/gem5.opt -d ~/m5out'+str(currentOutputFileNumber) +' ' + homeDir + '/gem5/configs/example/se.py -c ./src/benchmark -o ./data/inp.in -I ' + str(instrCount) +' '
+    benchmarkRunString = 'time ' + homeDir + '/gem5/build/X86/gem5.opt -d ~/m5out'+myFileNumStr +' ' + homeDir + '/gem5/configs/example/se.py -c ./src/benchmark -o ./data/inp.in -I ' + str(instrCount) +' '
     benchmarkRunString += '--cpu-type=timing --caches --l2cache --l1d_size='+str(l1dSize)+' --l1i_size='+str(l1iSize)+' --l2_size='+str(l2Size)+' --l1d_assoc='+str(l1dAssoc)+' --l1i_assoc='+str(l1iAssoc)+' --l2_assoc='+str(l2Assoc)+' --cacheline_size='+str(cacheline)
 
     print(benchmarkRunString)
@@ -35,7 +35,7 @@ def benchmark429Run(instrCount, l1dSize, l1iSize, l2Size, l1dAssoc, l1iAssoc, l2
     call(benchmarkRunString , shell=True)
 
     # Move results to save place
-    tempResultsDir = homeDir + "/m5out"+str(currentOutputFileNumber) +"/"
+    tempResultsDir = homeDir + "/m5out"+myFileNumStr +"/"
     finalResultsDir = homeDir + "/Results/" + dirName
     storeResultsString = 'mv "'+ tempResultsDir+ '" "' + finalResultsDir + '"'
     # print(storeResultsString)
@@ -50,7 +50,7 @@ def benchmark401Run(instrCount, l1dSize, l1iSize, l2Size, l1dAssoc, l1iAssoc, l2
 
     print("----401 run----")
     global currentOutputFileNumber
-    myFileNumber = currentOutputFileNumber
+    myFileNumStr = str(currentOutputFileNumber)
     currentOutputFileNumber += 1
     currentTime = datetime.now()
     currentTimeString = currentTime.strftime('%T.%f')[:-3]
@@ -63,7 +63,7 @@ def benchmark401Run(instrCount, l1dSize, l1iSize, l2Size, l1dAssoc, l1iAssoc, l2
     os.chdir(dirChangeString)
 
     # Build string
-    benchmarkRunString = 'time ' + homeDir + '/gem5/build/X86/gem5.opt -d ~/m5out'+str(currentOutputFileNumber) +' ' + homeDir + '/gem5/configs/example/se.py -c ./src/benchmark -o "./data/input.program 10" -I ' + str(instrCount) +' '
+    benchmarkRunString = 'time ' + homeDir + '/gem5/build/X86/gem5.opt -d ~/m5out'+myFileNumStr +' ' + homeDir + '/gem5/configs/example/se.py -c ./src/benchmark -o "./data/input.program 10" -I ' + str(instrCount) +' '
     benchmarkRunString += '--cpu-type=timing --caches --l2cache --l1d_size='+str(l1dSize)+' --l1i_size='+str(l1iSize)+' --l2_size='+str(l2Size)+' --l1d_assoc='+str(l1dAssoc)+' --l1i_assoc='+str(l1iAssoc)+' --l2_assoc='+str(l2Assoc)+' --cacheline_size='+str(cacheline)
 
     print(benchmarkRunString)
@@ -72,7 +72,7 @@ def benchmark401Run(instrCount, l1dSize, l1iSize, l2Size, l1dAssoc, l1iAssoc, l2
     call(benchmarkRunString , shell=True)
 
     # Move results to save place
-    tempResultsDir = homeDir + "/m5out/"
+    tempResultsDir = homeDir + "/m5out"+myFileNumStr +"/"
     finalResultsDir = homeDir + "/Results/" + dirName
     storeResultsString = 'mv "'+ tempResultsDir+ '" "' + finalResultsDir + '"'
     # print(storeResultsString)
