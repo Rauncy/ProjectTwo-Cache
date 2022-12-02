@@ -100,21 +100,21 @@ print("Start Time =" + startTimeString + "\n")
 # L2 Associativity = 1
 
 print("Medium Baseline Measurement\n")
-# benchmark429Run(instructionCount, "128kB", "128kB", "1MB", 2, 2, 1, 64, "Baseline-Configuration429")
-# benchmark401Run(instructionCount, "128kB", "128kB", "1MB", 2, 2, 1, 64, "Baseline-Configuration401")
+benchmark429Run(instructionCount, "128kB", "128kB", "1MB", 2, 2, 1, 64, "Baseline-Configuration429")
+benchmark401Run(instructionCount, "128kB", "128kB", "1MB", 2, 2, 1, 64, "Baseline-Configuration401")
 
 # Vary L1D Size 1-128kb
 print("============L1D SIZE CONFIG============\n")
 # print("=========L1D = 1KB=========\n")
-# benchmark429Run(instructionCount, "1kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-1KB-Configuration429")
-# benchmark401Run(instructionCount, "1kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-1KB-Configuration401")
+# # benchmark429Run(instructionCount, "1kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-1KB-Configuration429")
+# # benchmark401Run(instructionCount, "1kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-1KB-Configuration401")
 
-# print("=========L1D = 2KB=========\n")
-# benchmark429Run(instructionCount, "2kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-2KB-Configuration429")
-# benchmark401Run(instructionCount, "2kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-2KB-Configuration401")
+# # print("=========L1D = 2KB=========\n")
+# # benchmark429Run(instructionCount, "2kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-2KB-Configuration429")
+# # benchmark401Run(instructionCount, "2kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-2KB-Configuration401")
 
-print("=========L1D = 4KB=========\n")
-# benchmark429Run(instructionCount, "4kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-4KB-Configuration429")
+# print("=========L1D = 4KB=========\n")
+# # benchmark429Run(instructionCount, "4kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-4KB-Configuration429")
 benchmark401Run(instructionCount, "4kB", "128kB", "1MB", 2, 2, 1, 64, "L1D-4KB-Configuration401")
 
 print("=========L1D = 8KB=========\n")
